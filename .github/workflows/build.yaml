@@ -33,23 +33,23 @@ jobs:
       #     relative_project_path: ./
       #     archive_output: false
 
-      - name: Upload Artifact - Windows
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - Windows
-          path: ${{ steps.export.outputs.archive_directory }}/windows.zip
+      # - name: Upload Artifact - Windows
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Client - Windows
+      #     path: ${{ steps.export.outputs.archive_directory }}/windows.zip
       
-      - name: Upload Artifact - Linux
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - Linux
-          path: ${{ steps.export.outputs.archive_directory }}/linux.zip
+      # - name: Upload Artifact - Linux
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Client - Linux
+      #     path: ${{ steps.export.outputs.archive_directory }}/linux.zip
           
-      - name: Upload Artifact - Mac
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - Mac
-          path: ${{ steps.export.outputs.archive_directory }}/mac.zip
+      # - name: Upload Artifact - Mac
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Client - Mac
+      #     path: ${{ steps.export.outputs.archive_directory }}/mac.zip
 
 
       # - name: Upload Artifact - debug
@@ -62,6 +62,6 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.PUBLISHING_SECRET }}"
         run: |
-          gh release create v0.0.1-indev ${{ steps.export.outputs.archive_directory }}/windows.zip -R https://github.com/BadG1rlCov3n/TOHRPG-Builds
+          gh release create "v${{github.run_number}}-win-indev" ${{ steps.export.outputs.archive_directory }}/*.zip -R https://github.com/BadG1rlCov3n/TOHRPG-Builds
 
 
