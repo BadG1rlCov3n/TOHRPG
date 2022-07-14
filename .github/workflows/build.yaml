@@ -3,7 +3,7 @@ on:
   push: {}
 
 jobs:
-  Build and publish game:
+  Build:
     runs-on: ubuntu-latest
 
     steps:
