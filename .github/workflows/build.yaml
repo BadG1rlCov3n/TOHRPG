@@ -56,4 +56,12 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Client - Debug
-          path: ${{ steps.export.export2.archive_directory }}/*
+          path: ${{ steps.export.export2.build_directory }}/*
+
+      - name: Publish
+        env:
+          GITHUB_TOKEN: "${{ secrets.PUBLISHING_SECRET }}"
+        run: |
+          gh release create v0.0.1 ${{ steps.export.outputs.archive_directory }}/windows.zip -R https://github.com/BadG1rlCov3n/TOHRPG-Builds
+
+
