@@ -3,7 +3,7 @@ on:
   push: {}
 
 jobs:
-  Godot:
+  Build and publish game:
     runs-on: ubuntu-latest
 
     steps:
@@ -52,11 +52,11 @@ jobs:
           path: ${{ steps.export.outputs.archive_directory }}/mac.zip
 
 
-      - name: Upload Artifact - debug
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - Debug
-          path: ${{ steps.export.export2.build_directory }}/*
+      # - name: Upload Artifact - debug
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Client - Debug
+      #     path: ${{ steps.export.export2.build_directory }}/*
 
       - name: Publish
         env:
