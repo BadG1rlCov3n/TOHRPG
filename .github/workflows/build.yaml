@@ -22,16 +22,16 @@ jobs:
           relative_project_path: ./
           archive_output: true
 
-      - name: export game - debug
-        id: export2
-        # Use latest version (see releases for all versions)
-        uses: firebelley/godot-export@v4.1.0
-        with:
-          # Defining all the required inputs
-          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_linux_headless.64.zip
-          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_export_templates.tpz
-          relative_project_path: ./
-          archive_output: false
+      # - name: export game - debug
+      #   id: export2
+      #   # Use latest version (see releases for all versions)
+      #   uses: firebelley/godot-export@v4.1.0
+      #   with:
+      #     # Defining all the required inputs
+      #     godot_executable_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_linux_headless.64.zip
+      #     godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_export_templates.tpz
+      #     relative_project_path: ./
+      #     archive_output: false
 
       - name: Upload Artifact - Windows
         uses: actions/upload-artifact@v2
