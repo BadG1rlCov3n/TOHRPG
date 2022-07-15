@@ -26,7 +26,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.PUBLISHING_SECRET }}"
         run: |
-          gh release create "v${{github.run_number}}-indev" ${{ steps.export.outputs.archive_directory }}/*.zip --auto-notes
+          gh release create "v${{github.run_number}}-indev" ${{ steps.export.outputs.archive_directory }}/*.zip --generate-notes
         # -R https://github.com/BadG1rlCov3n/TOHRPG-Builds --notes "Remote built. Ignore the source folders, they are empty"
 
 
