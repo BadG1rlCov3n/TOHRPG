@@ -1,9 +1,8 @@
-name: Build Game
+name: Publish release to github
 on:
-  pull_request:
+  push:
     branches:
-      - master
-
+      - main
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -24,11 +23,9 @@ jobs:
           relative_project_path: ./
           archive_output: true
 
-      # - name: Publish
-      #   env:
-      #     GITHUB_TOKEN: "${{ secrets.PUBLISHING_SECRET }}"
-      #   run: |
-      #     gh release create "v${{github.run_number}}-indev" ${{ steps.export.outputs.archive_directory }}/*.zip --generate-notes
-      #   # -R https://github.com/BadG1rlCov3n/TOHRPG-Builds --notes "Remote built. Ignore the source folders, they are empty"
-
-
+      - name: Publish
+        env:
+          GITHUB_TOKEN: "${{ secrets.secrets.GITHUB_TOKEN }}"
+        run: |
+          gh release create "v${{github.run_number}}-indev" ${{ steps.export.outputs.archive_directory }}/*.zip --generate-notes
+       
