@@ -1,8 +1,8 @@
-name: Build Game
-on:
-  pull_request:
-    branches:
-      - master
+name: Build check - Can the project compile
+# on:
+#   pull_request:
+#     branches:
+#       - main
 
 jobs:
   Build:
@@ -13,7 +13,7 @@ jobs:
         with:
           lfs: true
 
-      - name: export game
+      - name: Attempt export
         id: export
         # Use latest version (see releases for all versions)
         uses: firebelley/godot-export@v4.1.0
@@ -23,12 +23,3 @@ jobs:
           godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_export_templates.tpz
           relative_project_path: ./
           archive_output: true
-
-      # - name: Publish
-      #   env:
-      #     GITHUB_TOKEN: "${{ secrets.PUBLISHING_SECRET }}"
-      #   run: |
-      #     gh release create "v${{github.run_number}}-indev" ${{ steps.export.outputs.archive_directory }}/*.zip --generate-notes
-      #   # -R https://github.com/BadG1rlCov3n/TOHRPG-Builds --notes "Remote built. Ignore the source folders, they are empty"
-
-
