@@ -1,5 +1,5 @@
 name: Build check - Can the project compile
- on:
+on:
   workflow_dispatch:
 #   pull_request:
 #     branches:
