@@ -1,7 +1,12 @@
 name: Build check - Can the project compile
+# on:
+#   check_run:
+#     types: [requested]
+
 on:
-  check_run:
-    types: [requested]
+  pull_request:
+    types: [opened, reopened]
+
 
 # on:
 #   push:
