@@ -5,3 +5,4 @@ Storyline: https://docs.google.com/document/d/1GPIYFfwrtVwq14_gTRRXMvAjtiAy4dkRQ
 
 ## General inspiration:
 - https://store.steampowered.com/app/368340/crosscode/
+- Pokemon :)
