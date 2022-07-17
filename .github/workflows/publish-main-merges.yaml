@@ -25,7 +25,7 @@ jobs:
 
       - name: Publish
         env:
-          GITHUB_TOKEN: "${{ secrets.secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: |
           gh release create "v${{github.run_number}}-indev" ${{ steps.export.outputs.archive_directory }}/*.zip --generate-notes
        
