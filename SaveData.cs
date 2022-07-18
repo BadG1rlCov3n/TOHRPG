@@ -14,6 +14,12 @@ public class SaveData : Node
     private const int EventCompleted = -1;
 
     /// <summary>
+    /// The save completed signal.
+    /// </summary>
+    [Signal]
+    public delegate void SaveCompletedSignal();
+
+    /// <summary>
     /// The events. 
     /// The idea would be to have a list of keys corresponding to the events happening in the game, and a value to indicate how far we are in completing it.
     /// For example tutorial could have the key "tutorial", and the events would be "beginning = 0, school = 1, chose palisman = 2, chosen palisman = 3, DONE = -1 (EventCompleted)". 
@@ -43,7 +49,7 @@ public class SaveData : Node
         if (what == MainLoop.NotificationWmQuitRequest)
         {
             JsonManager.Save(this, FileName);
-            GetTree().Quit();
+            GetTree().CallGroup("quit_button", "OnSaveCompleted");
         }
     }
 

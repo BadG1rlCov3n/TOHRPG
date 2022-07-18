@@ -12,4 +12,9 @@ public class SaveAndQuitButton : SelfConnectingButton
         // Safely request quitting the game (this notification will be caught by the SaveData.cs)
         GetTree().Notification(MainLoop.NotificationWmQuitRequest);
     }
+
+    private void OnSaveCompleted()
+    {
+        GetTree().Quit();
+    }
 }
