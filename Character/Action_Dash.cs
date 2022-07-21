@@ -77,7 +77,6 @@ public class Action_Dash : Node
         m_fDashTimeEnd = OS.GetTicksMsec() + m_fDashDuration;
         m_Body.LinearVelocity = v2Dir * m_iDashSpeed;
 
-        GD.Print("Dashing!");
 
     }
 }
