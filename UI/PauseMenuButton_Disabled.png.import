@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/imgMenuBtn_Focused.png-efb8204a6622702715aedc9f821754f2.stex"
+path="res://.import/PauseMenuButton_Disabled.png-5fe33ef73e5a1ec68c65ac85eff49c20.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/imgMenuBtn_Focused.png"
-dest_files=[ "res://.import/imgMenuBtn_Focused.png-efb8204a6622702715aedc9f821754f2.stex" ]
+source_file="res://UI/PauseMenuButton_Disabled.png"
+dest_files=[ "res://.import/PauseMenuButton_Disabled.png-5fe33ef73e5a1ec68c65ac85eff49c20.stex" ]
 
 [params]
 

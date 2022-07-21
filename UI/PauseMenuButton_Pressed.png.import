@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/imgMenuBtn_Pressed.png-18a022ffd123d4b07ed3796210c6155d.stex"
+path="res://.import/PauseMenuButton_Pressed.png-739f84de188f81fbe77581ecb7cf7543.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/imgMenuBtn_Pressed.png"
-dest_files=[ "res://.import/imgMenuBtn_Pressed.png-18a022ffd123d4b07ed3796210c6155d.stex" ]
+source_file="res://UI/PauseMenuButton_Pressed.png"
+dest_files=[ "res://.import/PauseMenuButton_Pressed.png-739f84de188f81fbe77581ecb7cf7543.stex" ]
 
 [params]
 

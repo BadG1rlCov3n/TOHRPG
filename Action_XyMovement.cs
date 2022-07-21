@@ -13,27 +13,27 @@ public class Action_XyMovement : Node
     // private string b = "text";
     [Export]
     float
-        m_f_MoveForce = 10;
+        m_fMoveForce = 10;
 
     [Export]
     Vector2
-        m_v2_VeloLimits = new Vector2(10,10);
+        m_v2VeloLimits = new Vector2(10,10);
     
     [Export]
     NodePath
-        m_path_Rigidbody2D;
+        m_pathRigidbody2D;
 
 
     RigidBody2D
         m_Body;
 
     Vector2
-        m_v2_ForceApplied = Vector2.Zero;
+        m_v2ForceApplied = Vector2.Zero;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        m_Body = GetNode<RigidBody2D>(m_path_Rigidbody2D);
+        m_Body = GetNode<RigidBody2D>(m_pathRigidbody2D);
        // m_Body.PhysicsMaterialOverride.Friction = 0.75f;
         m_Body.GravityScale = 0;
         SetProcess(true);
@@ -52,7 +52,7 @@ public class Action_XyMovement : Node
 
         
 
-        v2MoveDir *= m_f_MoveForce;
+        v2MoveDir *= m_fMoveForce;
 
         m_Body.LinearVelocity = v2MoveDir;
     }

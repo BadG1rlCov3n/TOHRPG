@@ -19,8 +19,8 @@ current = true
 process_mode = 0
 
 [node name="Action_XyMovement" parent="." index="4" instance=ExtResource( 4 )]
-m_f_MoveForce = 300.0
-m_path_Rigidbody2D = NodePath("..")
+m_fMoveForce = 300.0
+m_pathRigidbody2D = NodePath("..")
 
 [connection signal="sig_DashEnded" from="Action_Dash" to="Action_XyMovement" method="_on_DashEnded"]
 [connection signal="sig_DashStarted" from="Action_Dash" to="Action_XyMovement" method="_on_DashStarted"]
