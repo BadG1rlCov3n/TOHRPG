@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Action_XyMovement.cs" type="Script" id=1]
+
+[node name="Action_XyMovement" type="Node"]
+script = ExtResource( 1 )
