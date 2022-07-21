@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Character/Character_BASE.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Character/Action_Dash.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Character/MainCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Character/Action_XyMovement.tscn" type="PackedScene" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 60.0
+
+[node name="Player" instance=ExtResource( 1 )]
+physics_material_override = SubResource( 1 )
+
+[node name="Action_Dash" parent="." index="2" instance=ExtResource( 2 )]
+m_Path_Rigidbody2D = NodePath("..")
+
+[node name="Camera2D" parent="." index="3" instance=ExtResource( 3 )]
+current = true
+process_mode = 0
+
+[node name="Action_XyMovement" parent="." index="4" instance=ExtResource( 4 )]
+m_fMoveForce = 300.0
+m_pathRigidbody2D = NodePath("..")
+
+[connection signal="sig_DashEnded" from="Action_Dash" to="Action_XyMovement" method="_on_DashEnded"]
+[connection signal="sig_DashStarted" from="Action_Dash" to="Action_XyMovement" method="_on_DashStarted"]
