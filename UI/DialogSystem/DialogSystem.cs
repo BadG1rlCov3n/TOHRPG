@@ -8,20 +8,12 @@ public class DialogSystem : CanvasLayer
     private RichTextLabel _textLabel;
     private IEnumerator<float> _coRoutine;
     private Queue<string> _dialogQueue = new Queue<string>();
-
-    
-    
     private float _coDelay = 0f;
     private float _requestedCoDelay = 0f;
-    
-    
-    
 
     [Export]
     public float letterIntervalS = 0.05f;
     
-
-
     public override void _Ready()
     {
         _textLabel = GetNode<RichTextLabel>("TextContainer/MainText");
@@ -36,7 +28,8 @@ public class DialogSystem : CanvasLayer
     // The actual UI Co-routine, return value indicates desired delay between actions in seconds
     private IEnumerable<float> InnerProcess()
     {
-        while(true) {
+        while(true) 
+        {
             if (_dialogQueue.Count != 0)
             {
                 var nextMessage = _dialogQueue.Dequeue();
@@ -47,9 +40,7 @@ public class DialogSystem : CanvasLayer
                     _textLabel.Text = currentMessage;
                     yield return letterIntervalS;
                 }
-
                 yield return 1;
-
             }
             yield return 0; // If nothing else is ready, we just yield and reset
         }
