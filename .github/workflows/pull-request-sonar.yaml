@@ -1,4 +1,4 @@
-name: Build
+name: PR - Sonar
 on:
   push:
     branches:
@@ -35,8 +35,10 @@ jobs:
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
+          mkdir .\.sonar\scanner        
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+
+# New-Item -Path .\.sonar\scanner -ItemType Directory
 
       - name: Begin analyzer
         env:
