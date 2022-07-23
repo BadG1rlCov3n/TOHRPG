@@ -10,14 +10,8 @@ using System.Linq;
 public class SaveData : Node
 {
     private const string FileName = "save_file";
-
     private const int EventCompleted = -1;
-
-    /// <summary>
-    /// The save completed signal.
-    /// </summary>
-    [Signal]
-    public delegate void SaveCompletedSignal();
+    private SignalHandler _signalHandler;
 
     /// <summary>
     /// The events. 
@@ -33,6 +27,8 @@ public class SaveData : Node
     /// <inheritdoc/>
     public override void _Ready()
     {
+        _signalHandler = GetTree().Root.GetNode<SignalHandler>("SignalHandler");
+
         // We need to remove "auto quitting" to have save on quit.
         GetTree().SetAutoAcceptQuit(false);
 
@@ -42,15 +38,12 @@ public class SaveData : Node
         Events = save.Events;
     }
 
-    /// <inheritdoc/>
-    public override void _Notification(int what)
+    /// <summary>
+    /// Save the game.
+    /// </summary>
+    public void Save()
     {
-        // If we asked to safely quit, save, THEN quit.
-        if (what == MainLoop.NotificationWmQuitRequest)
-        {
-            JsonManager.Save(this, FileName);
-            GetTree().CallGroup("quit_button", "OnSaveCompleted");
-        }
+        JsonManager.Save(this, FileName);
     }
 
     /// <summary>
