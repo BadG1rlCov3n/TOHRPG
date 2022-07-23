@@ -14,3 +14,6 @@ data_*/
 
 # Visual studio
 .vs/
+
+# Just so our devops/sonar cloud integration doesn't combust:
+!.mono/assemblies/Debug/GodotSharp.dll
