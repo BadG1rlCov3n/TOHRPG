@@ -1,4 +1,4 @@
-name: Build check - Can the project compile
+name: PR - Build
 
 on:
   pull_request:
