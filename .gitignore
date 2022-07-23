@@ -11,3 +11,6 @@ data_*/
 # Launch config
 .vscode/tasks.json
 .vscode/launch.json
+
+# Visual studio
+.vs/
