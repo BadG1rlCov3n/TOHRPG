@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class DialogSystem : CanvasLayer
+public class DialogSystem : CanvasLayer 
 {
     private RichTextLabel _textLabel;
     private IEnumerator<float> _coRoutine;
@@ -24,7 +24,7 @@ public class DialogSystem : CanvasLayer
 
     public override void _Ready()
     {
-        _textLabel = GetNode<RichTextLabel>("BackgroundPanel/MainText");
+        _textLabel = GetNode<RichTextLabel>("TextContainer/MainText");
         _coRoutine = InnerProcess().GetEnumerator();
     }
 
