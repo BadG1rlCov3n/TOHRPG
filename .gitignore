@@ -5,7 +5,13 @@ export.cfg
 #export_presets.cfg
 
 # Mono-specific ignores
-.mono/
+.mono/*
+!.mono/assemblies
+.mono/assemblies/*
+!.mono/assemblies/Debug
+.mono/assemblies/Debug/*
+!.mono/assemblies/Debug/GodotSharp.dll
+
 data_*/
 
 # Launch config
@@ -14,6 +20,3 @@ data_*/
 
 # Visual studio
 .vs/
-
-# Just so our devops/sonar cloud integration doesn't combust:
-!.mono/assemblies/Debug/GodotSharp.dll
