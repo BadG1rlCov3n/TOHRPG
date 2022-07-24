@@ -15,7 +15,7 @@ public static class Autoload
     /// <param name="root">The root node.</param>
     public static void Setup(Node root)
     {
-        _root = root; ;
+        _root = root;
     }
 
     /// <summary>
