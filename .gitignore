@@ -5,9 +5,18 @@ export.cfg
 #export_presets.cfg
 
 # Mono-specific ignores
-.mono/
+.mono/*
+!.mono/assemblies
+.mono/assemblies/*
+!.mono/assemblies/Debug
+.mono/assemblies/Debug/*
+!.mono/assemblies/Debug/GodotSharp.dll
+
 data_*/
 
 # Launch config
 .vscode/tasks.json
 .vscode/launch.json
+
+# Visual studio
+.vs/
