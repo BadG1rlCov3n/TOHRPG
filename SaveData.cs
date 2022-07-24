@@ -27,7 +27,7 @@ public class SaveData : Node
     /// <inheritdoc/>
     public override void _Ready()
     {
-        _signalHandler = GetTree().Root.GetNode<SignalHandler>("SignalHandler");
+        _signalHandler = Autoload.Get<SignalHandler>();
 
         // We need to remove "auto quitting" to have save on quit.
         GetTree().SetAutoAcceptQuit(false);

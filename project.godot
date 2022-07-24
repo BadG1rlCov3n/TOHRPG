@@ -16,8 +16,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-SaveData="*res://SaveData.cs"
 SignalHandler="*res://Utilities/SignalHandler.cs"
+SaveData="*res://SaveData.cs"
 
 [input]
 
