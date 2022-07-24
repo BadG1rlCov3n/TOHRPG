@@ -16,7 +16,8 @@ public class SignalHandler : Node
     /// <inheritdoc/>
     public override void _Ready()
     {
-        _saveData = GetTree().Root.GetNode<SaveData>("SaveData");
+        Autoload.Setup(GetTree().Root);
+        _saveData = Autoload.Get<SaveData>();
     }
 
     /// <inheritdoc/>

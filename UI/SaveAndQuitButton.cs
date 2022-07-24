@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 /// <summary>
 /// The save and quit button.
@@ -9,7 +8,7 @@ public class SaveAndQuitButton : SelfConnectingButton
     /// <inheritdoc/>
     public override void _Ready()
     {
-        var signalHandler = GetTree().Root.GetNode<SignalHandler>("SignalHandler");
+        var signalHandler = Autoload.Get<SignalHandler>();
         signalHandler.Connect(nameof(SignalHandler.OnSaveSignal), this, nameof(OnSaveCompleted));
         base._Ready(); //forced to leave that here, we must override _ready to keep node behaviour, but we also need to call our parent's ready because it connects the signal.
     }
