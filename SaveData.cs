@@ -11,7 +11,6 @@ public class SaveData : Node
 {
     private const string FileName = "save_file";
     private const int EventCompleted = -1;
-    private SignalHandler _signalHandler;
 
     /// <summary>
     /// The events. 
@@ -27,8 +26,6 @@ public class SaveData : Node
     /// <inheritdoc/>
     public override void _Ready()
     {
-        _signalHandler = Autoload.Get<SignalHandler>();
-
         // We need to remove "auto quitting" to have save on quit.
         GetTree().SetAutoAcceptQuit(false);
 

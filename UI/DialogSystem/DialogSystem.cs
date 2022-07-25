@@ -1,62 +1,76 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
-public class DialogSystem : CanvasLayer 
+public class DialogSystem : Control
 {
-    private RichTextLabel _textLabel;
-    private IEnumerator<float> _coRoutine;
-    private Queue<string> _dialogQueue = new Queue<string>();
-    private float _coDelay = 0f;
-    private float _requestedCoDelay = 0f;
-
     [Export]
-    public float letterIntervalS = 0.05f;
-    
+    private float letterInterval = 0.05f;
+    private RichTextLabel _textLabel;
+    private Queue<string> _dialogQueue = new Queue<string>();
+    private Timer _dialogTimer = new Timer();
+    private float _percentStep = 0;
+
+    private const float MaxPercent = 1.0f;
+
     public override void _Ready()
     {
         _textLabel = GetNode<RichTextLabel>("TextContainer/MainText");
-        _coRoutine = InnerProcess().GetEnumerator();
+        _dialogTimer.Connect("timeout", this, nameof(OnDialogTimerTimeout));
+        AddChild(_dialogTimer);
     }
 
-    public void PlayDialog(string message)
-    {    
-        _dialogQueue.Enqueue(message);
-    }
-
-    // The actual UI Co-routine, return value indicates desired delay between actions in seconds
-    private IEnumerable<float> InnerProcess()
+    public void Play(List<string> messages)
     {
-        while(true) 
+        messages.ForEach(_ => _dialogQueue.Enqueue(_));
+        Show();
+    }
+
+    public void Skip()
+    {
+        if (!Visible)
         {
-            if (_dialogQueue.Count != 0)
-            {
-                var nextMessage = _dialogQueue.Dequeue();
-                var currentMessage = "";
-
-                for(int i = 0; i <= nextMessage.Length; i++) {
-                    currentMessage = nextMessage.Substr(0,i);
-                    _textLabel.Text = currentMessage;
-                    yield return letterIntervalS;
-                }
-                yield return 1;
-            }
-            yield return 0; // If nothing else is ready, we just yield and reset
+            return;
         }
-    } 
 
+        if (_textLabel.PercentVisible == MaxPercent)
+        {
+            _textLabel.Text = string.Empty;
+            if (!_dialogQueue.Any())
+            {
+                Hide();
+            }
+        }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    // Basically just drives the co-routine
+        if (_textLabel.PercentVisible < MaxPercent)
+        {
+            _textLabel.PercentVisible = MaxPercent;
+        }
+    }
+
+    public bool CurrentlyTalking()
+    {
+        return Visible;
+    }
+
     public override void _Process(float delta)
     {
-        _coDelay += delta;
+        if (_dialogQueue.Any() && _textLabel.Text.Empty())
+        {
+            _textLabel.Text = _dialogQueue.Dequeue();
+            _textLabel.PercentVisible = 0;
+            _percentStep = 1.0f / (float)_textLabel.Text.Length;
+            _dialogTimer.Start(letterInterval);
+        }
+    }
 
-        if (_coDelay >= _requestedCoDelay){
-            _coRoutine.MoveNext();
-            _requestedCoDelay = _coRoutine.Current;
-            _coDelay = 0;
+    private void OnDialogTimerTimeout()
+    {
+        _textLabel.PercentVisible += _percentStep;
+
+        if (_textLabel.PercentVisible == MaxPercent)
+        {
+            _dialogTimer.Stop();
         }
     }
 }
