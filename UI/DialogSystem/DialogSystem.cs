@@ -4,45 +4,53 @@ using System.Linq;
 
 public class DialogSystem : Control
 {
-    private RichTextLabel _textLabel;
-    private IEnumerator<float> _coRoutine;
-    private Queue<string> _dialogQueue = new Queue<string>();
-    private float _coDelay = 0f;
-    private float _requestedCoDelay = 0f;
-
-    private Timer _dialogTimer = new Timer();
-
     [Export]
-    public float letterInterval = 0.05f;
+    private float letterInterval = 0.05f;
+    private RichTextLabel _textLabel;
+    private Queue<string> _dialogQueue = new Queue<string>();
+    private Timer _dialogTimer = new Timer();
+    private float _percentStep = 0;
+
+    private const float MaxPercent = 1.0f;
 
     public override void _Ready()
     {
         _textLabel = GetNode<RichTextLabel>("TextContainer/MainText");
         _dialogTimer.Connect("timeout", this, nameof(OnDialogTimerTimeout));
+        AddChild(_dialogTimer);
     }
 
-    public void PlayDialog(string message)
+    public void Play(List<string> messages)
     {
-        _dialogQueue.Enqueue(message);
+        messages.ForEach(_ => _dialogQueue.Enqueue(_));
         Show();
     }
 
-    public void SkipDialog()
+    public void Skip()
     {
         if (!Visible)
         {
             return;
         }
 
-        if (_textLabel.PercentVisible == 1.0f)
+        if (_textLabel.PercentVisible == MaxPercent)
         {
             _textLabel.Text = string.Empty;
+            if (!_dialogQueue.Any())
+            {
+                Hide();
+            }
         }
 
-        if (_textLabel.PercentVisible < 1.0f)
+        if (_textLabel.PercentVisible < MaxPercent)
         {
-            _textLabel.PercentVisible = 1.0f;
+            _textLabel.PercentVisible = MaxPercent;
         }
+    }
+
+    public bool CurrentlyTalking()
+    {
+        return Visible;
     }
 
     public override void _Process(float delta)
@@ -51,17 +59,18 @@ public class DialogSystem : Control
         {
             _textLabel.Text = _dialogQueue.Dequeue();
             _textLabel.PercentVisible = 0;
+            _percentStep = 1.0f / (float)_textLabel.Text.Length;
             _dialogTimer.Start(letterInterval);
-        }
-
-        if (Visible && !_dialogQueue.Any())
-        {
-            Hide();
         }
     }
 
     private void OnDialogTimerTimeout()
     {
-        _textLabel.PercentVisible += 0.1f;
+        _textLabel.PercentVisible += _percentStep;
+
+        if (_textLabel.PercentVisible == MaxPercent)
+        {
+            _dialogTimer.Stop();
+        }
     }
 }
