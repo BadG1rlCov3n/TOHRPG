@@ -23,7 +23,7 @@ public static class Extensions
         catch (Exception exception)
         {
             GD.Print($"Exception while smart loading a scene : {exception.Message}");
-            throw exception;
+            throw;
         }
     }
 
